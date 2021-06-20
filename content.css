@@ -1,0 +1,13 @@
+.ktx-macro-button {
+    width: 175px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    background: #19d1d1;
+    background: -webkit-linear-gradient(to bottom, #17e677, #19d1d1);
+    background: linear-gradient(to bottom, #17e677, #19d1d1);
+    color: #ffffff;
+    font-size: 13px;
+    border: 1px solid #149393;
+    cursor: pointer;
+}
