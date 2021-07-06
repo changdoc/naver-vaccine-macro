@@ -41,6 +41,15 @@ const macroStop = (result) => {
     button.innerText = "자동 예약 시작";
 };
 
+const _reload = (data) => {
+    let settingInterval = parseInt(data.interval);
+    if (!Number.isInteger(settingInterval))
+        settingInterval = RELOAD_INTERVAL_MILLISECONDS;
+    console.log("curr interval:" + settingInterval);
+
+    _tick = setTimeout(reload, settingInterval);
+};
+
 const macro = (data) => {
 
     if (location.href.includes("failure")) {
@@ -62,6 +71,7 @@ const macro = (data) => {
     const len = $rows.length;
 
     if (!len) {
+        _reload(data);
         return;
     }
 
@@ -102,12 +112,7 @@ const macro = (data) => {
         }
     }
 
-    let settingInterval = parseInt(data.interval);
-    if (!Number.isInteger(settingInterval))
-        settingInterval = RELOAD_INTERVAL_MILLISECONDS;
-    console.log("curr interval:" + settingInterval);
-
-    _tick = setTimeout(reload, settingInterval);
+    _reload(data);
 };
 
 const reload = () => {

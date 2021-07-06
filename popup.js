@@ -60,6 +60,8 @@
             return "아스트라제네카";
         if (selectedId == "target_vaccine_1")
             return "얀센";
+        if (selectedId == "target_vaccine_2")
+            return "화이자";
         return "";
     }
 
