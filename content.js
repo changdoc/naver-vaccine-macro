@@ -102,11 +102,10 @@ const macro = (data) => {
             if (enable) {
                 let url = MAIN_URI + PROGRESS_PATH + document.location.search + "&cd=" + currentVaccineParam;
                 console.log("will move to :" + url + ", test:" + isTest);
-                // skip if test
-                if (!isTest) {
-                    document.location = url;
-                    chrome.extension.sendMessage({type: "testTicketing"});
-                }
+
+                if (!isTest) document.location = url;
+                if (isTest) chrome.extension.sendMessage({type: "testTicketing", url: url});
+
                 return;
             }
         }
