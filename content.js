@@ -143,6 +143,17 @@ const reload = () => {
         return;
     }
 
+    if (document.querySelector(".agree_all")) {
+        let checkList = document.querySelectorAll('.input_check');
+        if (checkList != null && checkList.length > 0)
+        {
+            for (let i = 0; i < checkList.length; i++) {
+                console.log(checkList[i]);
+                checkList[i].checked = true;
+            }
+        }
+    }
+
     const isStarted = localStorage.getItem("macro") === "on";
 
     chrome.storage.sync.get(function (data) {
