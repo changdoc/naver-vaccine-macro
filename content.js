@@ -15,7 +15,8 @@ const macroStart = () => {
     alert(
         "자동 예약을 시작합니다.\n" +
         "예약 시도 후에는 자동 예약이 멈춥니다.\n" +
-        "자동 예약 종료는 '자동 예약 정지' 혹은 esc키를 눌러주세요."
+        "자동 예약 종료는 '자동 예약 정지' 혹은 esc키를 눌러주세요.\n" +
+        "여러 창이 열려 있다면 브라우저에서 새로고침 해주세요."
     );
 
     localStorage.setItem("macro", "on");
@@ -128,6 +129,12 @@ const reload = () => {
         let url = location.href.substr(0, location.href.indexOf('&due_date'));
         console.log("need redirect macro. to : " + url);
         document.location = url;
+        return;
+    }
+
+    if (document.querySelector(".error_area")) {
+        console.log("error detected. try reload.");
+        reload();
         return;
     }
 
