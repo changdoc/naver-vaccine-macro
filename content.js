@@ -39,7 +39,9 @@ const macroStop = (result) => {
     clearTimeout(_tick);
 
     let button = document.querySelector(".ktx-macro-button");
-    button.innerText = "자동 예약 시작";
+    if (button) {
+        button.innerText = "자동 예약 시작";
+    }
 };
 
 const _reload = (data) => {
@@ -55,15 +57,15 @@ const macro = (data) => {
 
     if (location.href.includes("failure")) {
         console.log("예약 실패쓰");
-        macroStop("fail");
         chrome.extension.sendMessage({type: "failTicketing"});
+        macroStop("fail");
         return;
     }
 
     if (location.href.includes("success")) {
         console.log("예약 성공쓰");
-        macroStop("success");
         chrome.extension.sendMessage({type: "successTicketing"});
+        macroStop("success");
         return;
     }
 
