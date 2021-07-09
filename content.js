@@ -134,11 +134,11 @@ const reload = () => {
         return;
     }
 
-    if (document.querySelector(".error_area")) {
-        console.log("error detected. try reload.");
-        reload();
-        return;
-    }
+    // if (document.querySelector(".error_area")) {
+    //     console.log("error detected. try reload.");
+    //     reload();
+    //     return;
+    // }
 
     if (!document.querySelector(".process_list .process_item.on")) {
         console.log("ignored macro.");
