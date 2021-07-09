@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "NAVER Vaccine MACRO",
   "description": "네이버 백신 예약 매크로",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "permissions": [
     "https://v-search.nid.naver.com/",
     "storage"],
