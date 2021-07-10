@@ -73,6 +73,14 @@ const macro = (data) => {
     const $rows = document.querySelectorAll(".radio_list > li");
     const len = $rows.length;
 
+    // for TEST force Click
+    // const phoneLink = document.querySelector(".apply_area .info_box .info_list .desc .link.phone");
+    // console.log(phoneLink);
+    // phoneLink.click();
+
+    const confirmButton = document.getElementById('reservation_confirm');
+    console.log(confirmButton);
+
     if (!len) {
         _reload(data);
         return;
@@ -102,12 +110,24 @@ const macro = (data) => {
             let enable = num > 0;
             targetName.style.backgroundColor = enable ? "#3ef03e" : "#f03e3e";
             targetNum.style.backgroundColor = enable ? "#3ef03e" : "#f03e3e";
+
             if (enable) {
                 let url = MAIN_URI + PROGRESS_PATH + document.location.search + "&cd=" + currentVaccineParam;
                 console.log("will move to :" + url + ", test:" + isTest);
 
-                if (!isTest) document.location = url;
-                if (isTest) chrome.extension.sendMessage({type: "testTicketing", url: url});
+                if (!isTest)
+                {
+                    confirmButton.click();
+                    // url 이동 방식 deprecated
+                    // document.location = url;
+                }
+                if (isTest)
+                {
+                    chrome.extension.sendMessage({type: "testTicketing", url: url});
+                    // setTimeout(() => {
+                    //     confirmButton.click();
+                    // }, 5000);
+                }
 
                 return;
             }
