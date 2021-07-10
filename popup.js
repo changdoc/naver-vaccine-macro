@@ -3,11 +3,15 @@
     const MESSAGE_CONNECTION_SUCCESS = '연동되었습니다.';
     const MESSAGE_CONNECTION_FAIL = '연동에 실패하였습니다.<br>입력하신 정보를 다시 확인해주세요.';
 
+    const RESERVE_URL = 'https://v-search.nid.naver.com/reservation?orgCd=';
+
     const init = () => {
         document.getElementById('bot-token').value = localStorage.getItem('NAVER_VACCINE_MACRO::bot-token');
         document.getElementById('chat-id').value = localStorage.getItem('NAVER_VACCINE_MACRO::chat-id');
         document.getElementById('interval').value = localStorage.getItem('NAVER_VACCINE_MACRO::interval') | 1000;
         document.getElementById('reserve_test').checked = localStorage.getItem('NAVER_VACCINE_MACRO::reserve_test') == 1;
+
+        document.getElementById('graphql_result').value = localStorage.getItem('NAVER_VACCINE_MACRO::hospital_list');
 
         let radios = document.querySelectorAll('input[name="select_vaccine"]');
         for (let i = 0; i < radios.length; i++) {
@@ -102,9 +106,42 @@
         chrome.runtime.reload();
     }
 
+    const extract_list = () => {
+        const json = document.getElementById('graphql_result').value;
+        console.log(json);
+        const object = JSON.parse(json);
+        if (!object)
+            return;
+        const list = object[0].data.rests.businesses.items;
+        console.log(list);
+        if (!list)
+            return;
+        localStorage.setItem('NAVER_VACCINE_MACRO::hospital_list', json);
+        const desc = document.getElementById('hospital_results_desc');
+        desc.innerHTML = "";
+        desc.innerHTML = "병원 이름 클릭시 예약 신청 페이지로 이동";
+        const parent = document.getElementById('hospital_results');
+        parent.innerHTML = "";
+        for (let i = 0; i < list.length; i++) {
+            const name = list[i].name;
+            const distance = list[i].distance;
+            const orgCd = list[i].vaccineQuantity.vaccineOrganizationCode;
+            const url = RESERVE_URL + orgCd;
+            parent.insertAdjacentHTML(
+                "beforeend",
+                `
+        <li class="process_item">
+        <span>${name} ${distance} <a href="${url}" target="_blank">열기</a></span>
+        </li>
+    `
+            );
+        }
+    }
+
     init();
 
     document.getElementById('button-save').addEventListener('click', save);
     document.getElementById('button-reset').addEventListener('click', reset);
     document.getElementById('button-reload').addEventListener('click', reload);
+    document.getElementById('button-extract').addEventListener('click', extract_list)
 })();
