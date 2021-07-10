@@ -11,7 +11,10 @@
         document.getElementById('interval').value = localStorage.getItem('NAVER_VACCINE_MACRO::interval') | 1000;
         document.getElementById('reserve_test').checked = localStorage.getItem('NAVER_VACCINE_MACRO::reserve_test') == 1;
 
-        document.getElementById('graphql_result').value = localStorage.getItem('NAVER_VACCINE_MACRO::hospital_list');
+        const graphqlResult = document.getElementById('graphql_result');
+        graphqlResult.value = localStorage.getItem('NAVER_VACCINE_MACRO::hospital_list');
+
+        if (graphqlResult.value) extract_list();
 
         let radios = document.querySelectorAll('input[name="select_vaccine"]');
         for (let i = 0; i < radios.length; i++) {
