@@ -43,6 +43,8 @@ chrome.extension.onMessage.addListener((message, sender, sendResponse) => {
             sendTelegramMessage("test", message.url);
         } else if (message.type == 'failTicketing') {
             sendTelegramMessage("fail");
+        } else if (message.type == 'tryButErrorTicketing') {
+            sendTelegramMessage("try_error");
         }
         sendResponse(true);
     }
