@@ -26,6 +26,8 @@ const sendTelegramMessage = (key, param) => {
         msg = encodeURI('예약 성공 가능성이 높습니다. 네이버 백신 예약 페이지에서 확인 해보세요.');
     else if (key == "test")
         msg = encodeURIComponent('예약 가능 시 보내지는 테스트 메시지입니다. 테스트 모드가 아니였다면 예약 결과가 왔습니다. 시도 url : ' + param);
+    else if (key == "try_error")
+        msg = encodeURI('예약 시도 성공했습니다. 결과를 장담할 수 없습니다. (질병 관리청 응답 지연). 에러 페이지 내용을 확인해주세요.');
 
     const url = `https://api.telegram.org/bot${botToken}/sendmessage?chat_id=${chatId}&text=${msg}`;
 

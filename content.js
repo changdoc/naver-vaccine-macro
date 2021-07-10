@@ -55,6 +55,12 @@ const _reload = (data) => {
 
 const macro = (data) => {
 
+    if (location.href.includes("error")) {
+        console.log("예약 시도했지만 결과페이지는 에러, 질병 관리청 응답 지연");
+        chrome.extension.sendMessage({type: "tryButErrorTicketing"});
+        return;
+    }
+
     if (location.href.includes("failure")) {
         console.log("예약 실패쓰");
         chrome.extension.sendMessage({type: "failTicketing"});
