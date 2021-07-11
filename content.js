@@ -88,6 +88,12 @@ const macro = (data) => {
     console.log(confirmButton);
 
     if (!len) {
+        
+        if (document.querySelector(".error_area")) {
+            console.log("error detected. try reload.");
+            chrome.extension.sendMessage({type: "errorWhileTicketing"});
+        }
+
         _reload(data);
         return;
     }
@@ -111,7 +117,7 @@ const macro = (data) => {
         let num = parseInt(targetNum.innerHTML);
         console.log(targetName.innerHTML + ", num:" + num);
 
-        let isSelected = selectedName == "" || selectedName == targetName.innerHTML;
+        let isSelected = selectedName == null || selectedName == "" || selectedName == targetName.innerHTML;
         if (isSelected) {
             let enable = num > 0;
             targetName.style.backgroundColor = enable ? "#3ef03e" : "#f03e3e";
@@ -160,14 +166,8 @@ const reload = () => {
         return;
     }
 
-    // if (document.querySelector(".error_area")) {
-    //     console.log("error detected. try reload.");
-    //     reload();
-    //     return;
-    // }
-
-    if (!document.querySelector(".process_list .process_item.on")) {
-        console.log("ignored macro.");
+    if (!document.querySelector(".process_list")) {
+        console.log("can't found process list, ignored macro.");
         return;
     }
 

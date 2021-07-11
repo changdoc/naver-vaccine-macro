@@ -122,7 +122,7 @@
         localStorage.setItem('NAVER_VACCINE_MACRO::hospital_list', json);
         const desc = document.getElementById('hospital_results_desc');
         desc.innerHTML = "";
-        desc.innerHTML = "병원 이름 클릭시 예약 신청 페이지로 이동";
+        desc.innerHTML = "열기 클릭시 해당 병원 예약 신청 페이지로 이동";
         const parent = document.getElementById('hospital_results');
         parent.innerHTML = "";
         for (let i = 0; i < list.length; i++) {

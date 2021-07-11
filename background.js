@@ -27,7 +27,9 @@ const sendTelegramMessage = (key, param) => {
     else if (key == "test")
         msg = encodeURIComponent('예약 가능 시 보내지는 테스트 메시지입니다. 테스트 모드가 아니였다면 예약 결과가 왔습니다. 시도 url : ' + param);
     else if (key == "try_error")
-        msg = encodeURI('예약 시도 성공했습니다. 결과를 장담할 수 없습니다. (질병 관리청 응답 지연). 에러 페이지 내용을 확인해주세요.');
+        msg = encodeURI('예약 시도 성공했습니다. 결과를 장담할 수 없습니다. (예를 들어, 질병 관리청 응답 지연). 에러 페이지 내용을 확인해주세요.');
+    else if (key == "detect_error")
+        msg = encodeURI('에러 페이지가 나타난것으로 판단됩니다. 계속해서 정상적으로 동작하고 있는지 확인해주세요.');
 
     const url = `https://api.telegram.org/bot${botToken}/sendmessage?chat_id=${chatId}&text=${msg}`;
 
@@ -45,6 +47,8 @@ chrome.extension.onMessage.addListener((message, sender, sendResponse) => {
             sendTelegramMessage("fail");
         } else if (message.type == 'tryButErrorTicketing') {
             sendTelegramMessage("try_error");
+        } else if (message.type == 'errorWhileTicketing') {
+            sendTelegramMessage("detect_error");
         }
         sendResponse(true);
     }
