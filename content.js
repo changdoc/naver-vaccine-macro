@@ -166,11 +166,6 @@ const reload = () => {
         return;
     }
 
-    if (!document.querySelector(".process_list")) {
-        console.log("can't found process list, ignored macro.");
-        return;
-    }
-
     if (document.querySelector(".agree_all")) {
         let checkList = document.querySelectorAll('.input_check');
         if (checkList != null && checkList.length > 0)
@@ -194,6 +189,11 @@ const reload = () => {
         let buttonText = isStarted ? "자동 예약 정지(ESC)" : "자동 예약 시작";
         if (isTest)
             buttonText = "[TEST MODE] " + buttonText;
+
+        if (!document.querySelector(".process_list")) {
+            console.log("can't found process list, ignored macro.");
+            return;
+        }
 
         document.querySelector(".process_list").insertAdjacentHTML(
             "beforeend",
