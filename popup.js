@@ -69,6 +69,8 @@
             return "얀센";
         if (selectedId == "target_vaccine_2")
             return "화이자";
+        if (selectedId == "target_vaccine_3")
+            return "모더나";
         return "";
     }
 
