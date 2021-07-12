@@ -91,6 +91,18 @@
         .radio-toolbar input[type="radio"]:checked+label {
             background-color: #bbb;
         }
+
+        textarea {
+            width:100%;
+            height:100px;
+        }
+
+        .hospital_results {
+            list-style: decimal;
+        }
+        .hospital_results .hospital_item {
+            margin-left: 1em;
+        }
     </style>
 </head>
 
@@ -138,12 +150,12 @@
         </div>
         <div>
             <label for="graphql_result">graphql result</label>
-            <input type="text" id="graphql_result">
+            <textarea id="graphql_result"></textarea>
             <button type="button" class="button" id="button-extract">병원 목록 추출</button>
         </div>
         <div>
             <div id="hospital_results_desc"></div>
-            <ul id="hospital_results">
+            <ul id="hospital_results" class="hospital_results">
 
             </ul>
         </div>

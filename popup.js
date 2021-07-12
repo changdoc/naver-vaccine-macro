@@ -119,22 +119,39 @@
         console.log(list);
         if (!list)
             return;
+
         localStorage.setItem('NAVER_VACCINE_MACRO::hospital_list', json);
+
         const desc = document.getElementById('hospital_results_desc');
-        desc.innerHTML = "";
-        desc.innerHTML = "열기 클릭시 해당 병원 예약 신청 페이지로 이동";
-        const parent = document.getElementById('hospital_results');
-        parent.innerHTML = "";
+        const result = document.getElementById('hospital_results');
+
+        if (desc) {
+            desc.innerHTML = "";
+            desc.innerHTML = "열기 클릭시 해당 병원 예약 신청 페이지로 이동";
+        }
+
+        result.innerHTML = "";
         for (let i = 0; i < list.length; i++) {
-            const name = list[i].name;
-            const distance = list[i].distance;
-            const orgCd = list[i].vaccineQuantity.vaccineOrganizationCode;
-            const url = RESERVE_URL + orgCd;
-            parent.insertAdjacentHTML(
+            const obj = list[i];
+            if (!obj)
+                continue;
+            const name = obj.name;
+            const distance = obj.distance;
+            let orgCd = '';
+            let linkHTML = '';
+            if (obj.vaccineQuantity && obj.vaccineQuantity.vaccineOrganizationCode) {
+                orgCd = obj.vaccineQuantity.vaccineOrganizationCode;
+                const url = RESERVE_URL + orgCd;
+                linkHTML = `<a href="${url}" target="_blank">열기</a>`;
+            } else {
+                linkHTML = '(orgCd 없음)';
+            }
+
+            result.insertAdjacentHTML(
                 "beforeend",
                 `
-        <li class="process_item">
-        <span>${name} ${distance} <a href="${url}" target="_blank">열기</a></span>
+        <li class="hospital_item">
+        <span>${name} ${distance} ${linkHTML}</span>
         </li>
     `
             );
