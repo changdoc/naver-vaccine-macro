@@ -5,7 +5,8 @@
   "version": "1.0.4",
   "permissions": [
     "https://v-search.nid.naver.com/",
-    "storage"],
+    "storage",
+    "tabs"],
   "icons": {
     "96": "icon96.png"
   },

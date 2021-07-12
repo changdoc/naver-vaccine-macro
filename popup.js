@@ -111,6 +111,28 @@
         chrome.runtime.reload();
     }
 
+    const openAllLinks = () => {
+        const items = document.querySelectorAll('.hospital_item');
+        if (!items)
+            return;
+        let selected = new Array();
+        for (let i = 0; i < items.length; ++i) {
+            let curr = items[i];
+            let isChecked = curr.querySelector('input[name="open_hospital_link"]:checked');
+            if (isChecked) {
+                let anchor = curr.querySelector('.open_hospital_link');
+                if (anchor) selected.push(anchor);
+            }
+        }
+
+        for (let i = 0; i < selected.length; ++i) {
+            chrome.tabs.create({
+                url: selected[i].href
+            });
+
+        }
+    }
+
     const extract_list = () => {
         const json = document.getElementById('graphql_result').value;
         console.log(json);
@@ -129,7 +151,16 @@
 
         if (desc) {
             desc.innerHTML = "";
-            desc.innerHTML = "열기 클릭시 해당 병원 예약 신청 페이지로 이동";
+            desc.insertAdjacentHTML(
+                "beforeend",
+                `
+        <span>열기 클릭시 해당 병원 예약 신청 페이지로 이동</span>
+        <button type="button" class="button" id="open_all_links">선택된 링크들 열기</button>
+    `
+            );
+            const openAllBtn = document.getElementById('open_all_links');
+            if (openAllBtn)
+                openAllBtn.addEventListener('click', openAllLinks);
         }
 
         result.innerHTML = "";
@@ -144,7 +175,7 @@
             if (obj.vaccineQuantity && obj.vaccineQuantity.vaccineOrganizationCode) {
                 orgCd = obj.vaccineQuantity.vaccineOrganizationCode;
                 const url = RESERVE_URL + orgCd;
-                linkHTML = `<a href="${url}" target="_blank">열기</a>`;
+                linkHTML = `<a href="${url}" target="_blank" class="open_hospital_link">열기</a>`;
             } else {
                 linkHTML = '(orgCd 없음)';
             }
@@ -153,6 +184,7 @@
                 "beforeend",
                 `
         <li class="hospital_item">
+        <input type="checkbox" name="open_hospital_link"/>
         <span>${name} ${distance} ${linkHTML}</span>
         </li>
     `
