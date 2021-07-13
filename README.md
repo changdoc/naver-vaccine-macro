@@ -24,6 +24,9 @@ NAVER vaccine macro는 네이버 우리동네 백신 예약시도를 자동으�
 1. 예약 시도가 반드시 성공 한다는 보장이 없습니다.
 1. 예약 시도 후에는 다시 시도 할 경우 사용 방법 4번째 항목에 있는 [지금 신청 하기] 링크를 눌러 이동 하는 스텝 부터 다시 수행해야합니다.
 
+### Version History
+https://github.com/changdoc/naver-vaccine-macro/blob/main/CHANGELOG.md
+
 ### 
 본 프로그램은 KTX Macro
 [KTX Macro github page](https://github.com/youngjin-k/ktx-macro) 
