@@ -115,6 +115,21 @@
         const items = document.querySelectorAll('.hospital_item');
         if (!items)
             return;
+        for (let i = 0; i < items.length; ++i) {
+            let curr = items[i];
+            let anchor = curr.querySelector('.open_hospital_link');
+            if (anchor) {
+                chrome.tabs.create({
+                    url: anchor.href
+                });
+            }
+        }
+    }
+
+    const openSelectedLinks = () => {
+        const items = document.querySelectorAll('.hospital_item');
+        if (!items)
+            return;
         let selected = new Array();
         for (let i = 0; i < items.length; ++i) {
             let curr = items[i];
@@ -155,9 +170,13 @@
                 "beforeend",
                 `
         <span>열기 클릭시 해당 병원 예약 신청 페이지로 이동</span>
-        <button type="button" class="button" id="open_all_links">선택된 링크들 열기</button>
+        <button type="button" class="button" id="open_selected_links">선택된 링크 열기</button>
+        <button type="button" class="button" id="open_all_links">모든 링크 열기</button>
     `
             );
+            const openSelectedBtn = document.getElementById('open_selected_links');
+            if (openSelectedBtn)
+                openSelectedBtn.addEventListener('click', openSelectedLinks);
             const openAllBtn = document.getElementById('open_all_links');
             if (openAllBtn)
                 openAllBtn.addEventListener('click', openAllLinks);
