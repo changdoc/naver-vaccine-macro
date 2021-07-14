@@ -85,7 +85,7 @@ const macro = (data) => {
     // phoneLink.click();
 
     const confirmButton = document.getElementById('reservation_confirm');
-    console.log(confirmButton);
+    // console.log(confirmButton);
 
     if (!len) {
         
@@ -112,10 +112,10 @@ const macro = (data) => {
         let targetName = $row.querySelector("span.name");
         let currentVaccineParam = $row.querySelector("input").id;
 
-        console.log(currentVaccineParam);
+        // console.log(currentVaccineParam);
 
         let num = parseInt(targetNum.innerHTML);
-        console.log(targetName.innerHTML + ", num:" + num);
+        // console.log(targetName.innerHTML + ", num:" + num);
 
         let isSelected = selectedName == null || selectedName == "" || selectedName == targetName.innerHTML;
         if (isSelected) {
@@ -171,7 +171,7 @@ const reload = () => {
         if (checkList != null && checkList.length > 0)
         {
             for (let i = 0; i < checkList.length; i++) {
-                console.log(checkList[i]);
+                // console.log(checkList[i]);
                 checkList[i].checked = true;
             }
         }

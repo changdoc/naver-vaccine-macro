@@ -8,7 +8,19 @@
     const init = () => {
         document.getElementById('bot-token').value = localStorage.getItem('NAVER_VACCINE_MACRO::bot-token');
         document.getElementById('chat-id').value = localStorage.getItem('NAVER_VACCINE_MACRO::chat-id');
-        document.getElementById('interval').value = localStorage.getItem('NAVER_VACCINE_MACRO::interval') | 1000;
+        let savedInterval = parseInt(localStorage.getItem('NAVER_VACCINE_MACRO::interval'));
+
+        // console.log("saved interval : ");
+        // console.log(savedInterval);
+        // console.log(Number.isInteger(savedInterval));
+
+        if (!savedInterval || savedInterval < 1)
+        {
+            savedInterval = 1000;
+            console.log("saved interval invalid reset to : " + savedInterval);
+            localStorage.setItem('NAVER_VACCINE_MACRO::interval', savedInterval);
+        }
+        document.getElementById('interval').value = savedInterval;
         document.getElementById('reserve_test').checked = localStorage.getItem('NAVER_VACCINE_MACRO::reserve_test') == 1;
 
         const graphqlResult = document.getElementById('graphql_result');
@@ -150,12 +162,12 @@
 
     const extract_list = () => {
         const json = document.getElementById('graphql_result').value;
-        console.log(json);
+        // console.log(json);
         const object = JSON.parse(json);
         if (!object)
             return;
         const list = object[0].data.rests.businesses.items;
-        console.log(list);
+        // console.log(list);
         if (!list)
             return;
 
