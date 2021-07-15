@@ -48,6 +48,14 @@ const _reload = (data) => {
     let settingInterval = parseInt(data.interval);
     if (!Number.isInteger(settingInterval))
         settingInterval = RELOAD_INTERVAL_MILLISECONDS;
+
+    let modify = ((new Date().getTime()) % 20);
+
+    console.log("setting interval:" + settingInterval + ", modify:" + modify);
+
+    if (settingInterval > modify)
+        settingInterval -= modify;
+
     console.log("curr interval:" + settingInterval);
 
     _tick = setTimeout(reload, settingInterval);

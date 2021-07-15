@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - 모든 링크 열기 버튼 추가
+### Changed
 - 새로고침 주기 저장 후 리로드시 잘 못 표기 되고 있는 부분 수정
+- 새로고침 주기 반영시 0~20ms씩 변화 있도록 동작하게 수정
 
 ## [1.0.5] - 2017-07-13
 ### Added
