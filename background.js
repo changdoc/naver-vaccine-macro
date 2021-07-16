@@ -38,7 +38,8 @@ const sendTelegramMessage = (key, param) => {
 
 chrome.extension.onMessage.addListener((message, sender, sendResponse) => {
     if (message) {
-        playSound();
+        let needPlaySound = true;
+
         if (message.type == 'successTicketing') {
             sendTelegramMessage("success");
         } else if (message.type == 'testTicketing') {
@@ -49,7 +50,11 @@ chrome.extension.onMessage.addListener((message, sender, sendResponse) => {
             sendTelegramMessage("try_error");
         } else if (message.type == 'errorWhileTicketing') {
             sendTelegramMessage("detect_error");
+            needPlaySound = false;
         }
+
+        if (needPlaySound) playSound();
+
         sendResponse(true);
     }
 });
