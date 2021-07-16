@@ -4,6 +4,7 @@
     const MESSAGE_CONNECTION_FAIL = '연동에 실패하였습니다.<br>입력하신 정보를 다시 확인해주세요.';
 
     const RESERVE_URL = 'https://v-search.nid.naver.com/reservation?orgCd=';
+    const RESERVER_URL_ADD_PARM = '&sid=';
 
     const init = () => {
         document.getElementById('bot-token').value = localStorage.getItem('NAVER_VACCINE_MACRO::bot-token');
@@ -201,11 +202,13 @@
                 continue;
             const name = obj.name;
             const distance = obj.distance;
+            let sid = '';
             let orgCd = '';
             let linkHTML = '';
             if (obj.vaccineQuantity && obj.vaccineQuantity.vaccineOrganizationCode) {
                 orgCd = obj.vaccineQuantity.vaccineOrganizationCode;
-                const url = RESERVE_URL + orgCd;
+                sid = obj.id;
+                const url = RESERVE_URL + orgCd + RESERVER_URL_ADD_PARM + sid;
                 linkHTML = `<a href="${url}" target="_blank" class="open_hospital_link">열기</a>`;
             } else {
                 linkHTML = '(orgCd 없음)';

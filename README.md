@@ -9,7 +9,7 @@ NAVER vaccine macro는 네이버 우리동네 백신 예약시도를 자동으�
 1. https://v-search.nid.naver.com/home 네이버 우리 동네 백신알림 페이지에 접속하여 네이버 인증서를 미리 발급 받도록 합니다. 관련 설명 [백신 노쇼 관련 네이버 지식 백과 페이지](https://terms.naver.com/entry.naver?docId=6417236&cid=43667&categoryId=43667)
 1. 백신 접종을 희망하는 병원을 검색하여 알림 신청을 해둡니다.
 3. 잔여 백신이 추가되어 알림을 받게 되면 네이버 톡톡에 [네이버 우리동네 백신알림]을 통해 접종기관 알림 전달됩니다. 
-4. [네이버 우리동네 백신알림] 대화방에서 원하는 접종 기관에서 온 메시지에 있는 [지금 신청 하기] 링크를 눌러 이동합니다. (https://v-search.nid.naver.com/reservation/standby?orgCd=XXXX 형태)
+4. [네이버 우리동네 백신알림] 대화방에서 원하는 접종 기관에서 온 메시지에 있는 [지금 신청 하기] 링크를 눌러 이동합니다. (https://v-search.nid.naver.com/reservation/standby?orgCd=XXXX&sid=XXXXX 형태)
    - 알림을 받기 전에 원하는 병원 예약 신청 페이지 url 알아내는 방법은 별도로 작성해두었습니다. https://github.com/changdoc/naver-vaccine-macro/issues/4
    - 병원 예약 신청 페이지 url 목록 생성 방법도 작성해두었습니다. https://github.com/changdoc/naver-vaccine-macro/issues/11
 6. https://v-search.nid.naver.com/reservation/info?key=XXXX 형태의 url, 예약 신청 페이지가 정상적으로 노출되는지 확인 합니다.

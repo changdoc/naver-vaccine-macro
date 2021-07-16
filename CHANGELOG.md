@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 새로고침 주기 저장 후 리로드 시 잘 못 표기 되고 있는 부분 수정
 - 새로고침 주기 반영시 0~20ms씩 변화 있도록 동작하게 수정
 - 예약신청 페이지에서 에러 감지 되었을 때는 사운드 재생 되지 않도록 수정
+- orgCd만으로는 예약 신청 url 접근 불가하여 sid 파라미터 추가
 
 ## [1.0.5] - 2017-07-13
 ### Added
