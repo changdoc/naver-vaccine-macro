@@ -2,6 +2,8 @@ const MAIN_URI = "https://v-search.nid.naver.com/reservation";
 const PROGRESS_PATH = "/progress";
 const RELOAD_INTERVAL_MILLISECONDS = 1000;
 let _tick;
+let sButtonText = "";
+let sCurrentName = "";
 
 const setEscapeEvent = () => {
     window.addEventListener("keydown", e => {
@@ -61,24 +63,37 @@ const _reload = (data) => {
     _tick = setTimeout(reload, settingInterval);
 };
 
+const injectButton = () => {
+    document.querySelector(".process_list").insertAdjacentHTML(
+        "beforeend",
+        `
+        <li class="process_item"><button type="button" class="ktx-macro-button">${sButtonText}</button></li>
+    `
+    );
+
+    document
+        .querySelector(".ktx-macro-button")
+        .addEventListener("click", onMacroClick);
+}
+
 const macro = (data) => {
 
     if (location.href.includes("error")) {
         console.log("예약 시도했지만 결과페이지는 에러, 질병 관리청 응답 지연");
-        chrome.extension.sendMessage({type: "tryButErrorTicketing"});
+        chrome.extension.sendMessage({type: "tryButErrorTicketing", name: sCurrentName});
         return;
     }
 
     if (location.href.includes("failure")) {
         console.log("예약 실패쓰");
-        chrome.extension.sendMessage({type: "failTicketing"});
+        chrome.extension.sendMessage({type: "failTicketing", name: sCurrentName});
         macroStop("fail");
         return;
     }
 
     if (location.href.includes("success")) {
         console.log("예약 성공쓰");
-        chrome.extension.sendMessage({type: "successTicketing"});
+        chrome.extension.sendMessage({type: "successTicketing", name: sCurrentName});
         macroStop("success");
         return;
     }
@@ -95,11 +110,17 @@ const macro = (data) => {
     const confirmButton = document.getElementById('reservation_confirm');
     // console.log(confirmButton);
 
+    const orgName = document.querySelector(".h_title .accent");
+    if (orgName && orgName.innerHTML.length > 0) {
+        sCurrentName = orgName.innerHTML;
+    }
+    // console.log('current : ' + sCurrentName);
+
     if (!len) {
-        
+
         if (document.querySelector(".error_area")) {
             console.log("error detected. try reload.");
-            chrome.extension.sendMessage({type: "errorWhileTicketing"});
+            chrome.extension.sendMessage({type: "errorWhileTicketing", name: sCurrentName});
         }
 
         _reload(data);
@@ -132,18 +153,16 @@ const macro = (data) => {
             targetNum.style.backgroundColor = enable ? "#3ef03e" : "#f03e3e";
 
             if (enable) {
-                let url = MAIN_URI + PROGRESS_PATH + document.location.search + "&cd=" + currentVaccineParam;
-                console.log("will move to :" + url + ", test:" + isTest);
-
-                if (!isTest)
-                {
+                console.log("is test:" + isTest);
+                if (!isTest) {
                     confirmButton.click();
                     // url 이동 방식 deprecated
                     // document.location = url;
                 }
-                if (isTest)
-                {
-                    chrome.extension.sendMessage({type: "testTicketing", url: url});
+                if (isTest) {
+                    let url = MAIN_URI + PROGRESS_PATH + document.location.search + "&cd=" + currentVaccineParam;
+                    console.log("will move to :" + url);
+                    chrome.extension.sendMessage({type: "testTicketing", url: url, name: sCurrentName});
                     // setTimeout(() => {
                     //     confirmButton.click();
                     // }, 5000);
@@ -176,8 +195,7 @@ const reload = () => {
 
     if (document.querySelector(".agree_all")) {
         let checkList = document.querySelectorAll('.input_check');
-        if (checkList != null && checkList.length > 0)
-        {
+        if (checkList != null && checkList.length > 0) {
             for (let i = 0; i < checkList.length; i++) {
                 // console.log(checkList[i]);
                 checkList[i].checked = true;
@@ -203,15 +221,7 @@ const reload = () => {
             return;
         }
 
-        document.querySelector(".process_list").insertAdjacentHTML(
-            "beforeend",
-            `
-        <li class="process_item"><button type="button" class="ktx-macro-button">${buttonText}</button></li>
-    `
-        );
-
-        document
-            .querySelector(".ktx-macro-button")
-            .addEventListener("click", onMacroClick);
+        sButtonText = buttonText;
+        setTimeout(injectButton, 100);
     });
 })();

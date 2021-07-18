@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- 매크로 버튼 추가 동작 타이밍 조금 늦춤
+- 텔레그램 메시지 전송시 예약 시도 병원 이름 포함 되도록
 
 ## [1.0.6] - 2021-07-16
 ### Added
