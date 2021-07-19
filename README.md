@@ -9,6 +9,7 @@ NAVER vaccine macro는 네이버 우리동네 백신 예약시도를 자동으�
 ### 사용 방법
 1. 크롬 확장프로그램에서 [NAVER Vaccine MACRO] 설치를 진행합니다.
    - 네이버 웨일 브라우저나 최신 버전을 바로 적용하기 위해서는 개발자 모드로 코드를 받으시고 직접 설치하시면 됩니다.
+      - (최신 버전 다운로드 방법) https://github.com/changdoc/naver-vaccine-macro/issues/29
       - (크롬 개발자 모드 관련 설명 블로그) https://trend21c.tistory.com/1030
 3. https://v-search.nid.naver.com/home 네이버 우리 동네 백신알림 페이지에 접속하여 네이버 인증서를 미리 발급 받도록 합니다.
 4. 백신 접종을 희망하는 병원을 검색하여 알림 신청을 해둡니다.
