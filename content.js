@@ -21,22 +21,32 @@ const macroStart = () => {
         "여러 창이 열려 있다면 브라우저에서 새로고침 해주세요."
     );
 
-    localStorage.setItem("macro", "on");
-
-    reload();
+    chrome.storage.local.set({macro: "on"}, function () {
+        reload();
+    });
+    // localStorage.setItem("macro", "on");
 };
 
 const onMacroClick = () => {
-    const isStarted = localStorage.getItem("macro") === "on";
-    if (isStarted)
-        macroStop();
-    else macroStart();
+    chrome.storage.local.get(function (data) {
+        const isStarted = (data.macro === "on");
+        if (isStarted)
+            macroStop();
+        else
+            macroStart();
+    });
+
+    // const isStarted = localStorage.getItem("macro") === "on";
+    // if (isStarted)
+    //     macroStop();
+    // else macroStart();
 };
 
 const macroStop = (result) => {
     if (!result)
         alert("자동 예약을 종료합니다.");
-    localStorage.removeItem("macro");
+
+    chrome.storage.local.set({macro: ""});
 
     clearTimeout(_tick);
 
@@ -195,6 +205,8 @@ const reload = () => {
         document.location = url;
         return;
     }
+    if (localStorage.getItem("macro"))
+        localStorage.removeItem("macro");
 
     if (document.querySelector(".agree_all")) {
         let checkList = document.querySelectorAll('.input_check');
@@ -206,25 +218,49 @@ const reload = () => {
         }
     }
 
-    const isStarted = localStorage.getItem("macro") === "on";
+    chrome.storage.local.get(function (value) {
+        const isStarted = value.macro === "on";
 
-    chrome.storage.sync.get(function (data) {
-        if (isStarted) {
-            macro(data);
-            setEscapeEvent();
-        }
+        chrome.storage.sync.get(function (data) {
+            if (isStarted) {
+                macro(data);
+                setEscapeEvent();
+            }
 
-        const isTest = data.is_test === 1;
-        let buttonText = isStarted ? "자동 예약 정지(ESC)" : "자동 예약 시작";
-        if (isTest)
-            buttonText = "[TEST MODE] " + buttonText;
+            const isTest = data.is_test === 1;
+            let buttonText = isStarted ? "자동 예약 정지(ESC)" : "자동 예약 시작";
+            if (isTest)
+                buttonText = "[TEST MODE] " + buttonText;
 
-        if (!document.querySelector(".process_list")) {
-            console.log("can't found process list, ignored macro.");
-            return;
-        }
+            if (!document.querySelector(".process_list")) {
+                console.log("can't found process list, ignored macro.");
+                return;
+            }
 
-        sButtonText = buttonText;
-        setTimeout(injectButton, 100);
+            sButtonText = buttonText;
+            setTimeout(injectButton, 100);
+        });
     });
+
+    // const isStarted = localStorage.getItem("macro") === "on";
+
+    // chrome.storage.sync.get(function (data) {
+    //     if (isStarted) {
+    //         macro(data);
+    //         setEscapeEvent();
+    //     }
+    //
+    //     const isTest = data.is_test === 1;
+    //     let buttonText = isStarted ? "자동 예약 정지(ESC)" : "자동 예약 시작";
+    //     if (isTest)
+    //         buttonText = "[TEST MODE] " + buttonText;
+    //
+    //     if (!document.querySelector(".process_list")) {
+    //         console.log("can't found process list, ignored macro.");
+    //         return;
+    //     }
+    //
+    //     sButtonText = buttonText;
+    //     setTimeout(injectButton, 100);
+    // });
 })();
