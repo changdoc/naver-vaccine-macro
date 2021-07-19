@@ -108,7 +108,8 @@ const macro = (data) => {
     // phoneLink.click();
 
     const confirmButton = document.getElementById('reservation_confirm');
-    // console.log(confirmButton);
+    console.log(confirmButton);
+    // confirmButton.click();
 
     const orgName = document.querySelector(".h_title .accent");
     if (orgName && orgName.innerHTML.length > 0) {
@@ -154,18 +155,19 @@ const macro = (data) => {
 
             if (enable) {
                 console.log("is test:" + isTest);
+                let url = MAIN_URI + PROGRESS_PATH + document.location.search + "&cd=" + currentVaccineParam;
+
                 if (!isTest) {
                     confirmButton.click();
+                    document.location = url;
                     chrome.extension.sendMessage({type: "tryTicketing", name: sCurrentName});
-                    // url 이동 방식 deprecated
-                    // document.location = url;
                 }
                 if (isTest) {
-                    let url = MAIN_URI + PROGRESS_PATH + document.location.search + "&cd=" + currentVaccineParam;
                     console.log("will move to :" + url);
                     chrome.extension.sendMessage({type: "testTicketing", url: url, name: sCurrentName});
                     // setTimeout(() => {
                     //     confirmButton.click();
+                    //     document.location = url;
                     // }, 5000);
                 }
 

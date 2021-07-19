@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - 병원 이름 포함된 텔레그램 메시지 전송 예약 시도 타이밍에 추가
+- 예약 신청 방식 다시 변경 (예약 신청 버튼 click event 발생시키는 형태 -> url 변경하여 페이지 이동)
 
 ## [1.0.7] - 2021-07-19
 ### Changed
