@@ -156,6 +156,7 @@ const macro = (data) => {
                 console.log("is test:" + isTest);
                 if (!isTest) {
                     confirmButton.click();
+                    chrome.extension.sendMessage({type: "tryTicketing", name: sCurrentName});
                     // url 이동 방식 deprecated
                     // document.location = url;
                 }
