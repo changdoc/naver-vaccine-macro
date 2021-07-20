@@ -1,6 +1,6 @@
 const MAIN_URI = "https://v-search.nid.naver.com/reservation";
 const PROGRESS_PATH = "/progress";
-const RELOAD_INTERVAL_MILLISECONDS = 1000;
+const RELOAD_INTERVAL_MILLISECONDS = 3500;
 let _tick;
 let sButtonText = "";
 let sCurrentName = "";
