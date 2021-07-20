@@ -14,7 +14,7 @@
     {
       "all_frames": true,
       "js": ["content.js"],
-      "css": ["content.css"],
+      "css": [],
       "matches": ["https://v-search.nid.naver.com/*"],
       "run_at": "document_end"
     }

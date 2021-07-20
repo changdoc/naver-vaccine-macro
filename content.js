@@ -5,6 +5,7 @@ let _tick;
 let sButtonText = "";
 let sCurrentName = "";
 const _className = "_" + Math.random().toString(36).substring(2,7);
+const _buttonStyle = "width: 175px;height: 38px;line-height: 38px;text-align: center;background: linear-gradient(to bottom, #17e677, #19d1d1);color: #ffffff;font-size: 13px;border: 1px solid #149393;cursor: pointer;";
 
 const setEscapeEvent = () => {
     window.addEventListener("keydown", e => {
@@ -78,7 +79,7 @@ const injectButton = () => {
     document.querySelector(".process_list").insertAdjacentHTML(
         "beforeend",
         `
-        <li class="process_item"><button type="button" class="${_className} button-added">${sButtonText}</button></li>
+        <li class="process_item"><button type="button" class="${_className}" style="${_buttonStyle}">${sButtonText}</button></li>
     `
     );
 
