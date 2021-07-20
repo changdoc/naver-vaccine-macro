@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - localStorage 사용하지 않고 chrome.storage사용하여 동작 여부 체크
 
+## [1.0.9] - 2021-07-20
+### Changed
+- 기본 인터벌 변경 1000ms -> 3500ms
+- 매크로 버튼 이름 변경 ktx-macro-button -> run-button
+
 ## [1.0.8] - 2021-07-19
 ### Changed
 - 병원 이름 포함된 텔레그램 메시지 전송 예약 시도 타이밍에 추가
