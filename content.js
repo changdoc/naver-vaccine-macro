@@ -50,7 +50,7 @@ const macroStop = (result) => {
 
     clearTimeout(_tick);
 
-    let button = document.querySelector(".ktx-macro-button");
+    let button = document.querySelector(".run-button");
     if (button) {
         button.innerText = "자동 예약 시작";
     }
@@ -77,12 +77,12 @@ const injectButton = () => {
     document.querySelector(".process_list").insertAdjacentHTML(
         "beforeend",
         `
-        <li class="process_item"><button type="button" class="ktx-macro-button">${sButtonText}</button></li>
+        <li class="process_item"><button type="button" class="run-button">${sButtonText}</button></li>
     `
     );
 
     document
-        .querySelector(".ktx-macro-button")
+        .querySelector(".run-button")
         .addEventListener("click", onMacroClick);
 }
 
