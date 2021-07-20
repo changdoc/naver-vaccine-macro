@@ -5,8 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.0.9] - 2021-07-20
 ### Changed
 - localStorage 사용하지 않고 chrome.storage사용하여 동작 여부 체크
+- 작동 버튼 class 랜덤 문자열로 생성
+- 기본,최소 인터벌 2000ms
 
 ## [1.0.8] - 2021-07-19
 ### Changed

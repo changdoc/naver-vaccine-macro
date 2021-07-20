@@ -1,9 +1,10 @@
 const MAIN_URI = "https://v-search.nid.naver.com/reservation";
 const PROGRESS_PATH = "/progress";
-const RELOAD_INTERVAL_MILLISECONDS = 1000;
+const RELOAD_INTERVAL_MILLISECONDS = 2000;
 let _tick;
 let sButtonText = "";
 let sCurrentName = "";
+const _className = "_" + Math.random().toString(36).substring(2,7);
 
 const setEscapeEvent = () => {
     window.addEventListener("keydown", e => {
@@ -50,7 +51,7 @@ const macroStop = (result) => {
 
     clearTimeout(_tick);
 
-    let button = document.querySelector(".ktx-macro-button");
+    let button = document.querySelector(`.${_className}`);
     if (button) {
         button.innerText = "자동 예약 시작";
     }
@@ -77,12 +78,12 @@ const injectButton = () => {
     document.querySelector(".process_list").insertAdjacentHTML(
         "beforeend",
         `
-        <li class="process_item"><button type="button" class="ktx-macro-button">${sButtonText}</button></li>
+        <li class="process_item"><button type="button" class="${_className} button-added">${sButtonText}</button></li>
     `
     );
 
     document
-        .querySelector(".ktx-macro-button")
+        .querySelector(`.${_className}`)
         .addEventListener("click", onMacroClick);
 }
 

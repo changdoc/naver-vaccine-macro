@@ -6,6 +6,8 @@
     const RESERVE_URL = 'https://v-search.nid.naver.com/reservation?orgCd=';
     const RESERVER_URL_ADD_PARM = '&sid=';
 
+    const MIN_RELOAD_INTERVAL_MILLISECONDS = 2000;
+
     const init = () => {
         document.getElementById('bot-token').value = localStorage.getItem('NAVER_VACCINE_MACRO::bot-token');
         document.getElementById('chat-id').value = localStorage.getItem('NAVER_VACCINE_MACRO::chat-id');
@@ -15,9 +17,9 @@
         // console.log(savedInterval);
         // console.log(Number.isInteger(savedInterval));
 
-        if (!savedInterval || savedInterval < 1)
+        if (!savedInterval || savedInterval < MIN_RELOAD_INTERVAL_MILLISECONDS)
         {
-            savedInterval = 1000;
+            savedInterval = MIN_RELOAD_INTERVAL_MILLISECONDS;
             console.log("saved interval invalid reset to : " + savedInterval);
             localStorage.setItem('NAVER_VACCINE_MACRO::interval', savedInterval);
         }
