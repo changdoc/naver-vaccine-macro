@@ -1,29 +1,57 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "NAVER Vaccine MACRO",
   "description": "네이버 백신 예약 매크로",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "permissions": [
-    "https://v-search.nid.naver.com/",
     "storage",
-    "tabs"],
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://v-search.nid.naver.com/",
+    "https://m.place.naver.com/rest/vaccine"
+  ],
   "icons": {
     "96": "icon96.png"
   },
   "content_scripts": [
     {
       "all_frames": true,
-      "js": ["content.js"],
+      "js": [
+        "content.js"
+      ],
       "css": [],
-      "matches": ["https://v-search.nid.naver.com/*"],
+      "matches": [
+        "https://v-search.nid.naver.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "map.js"
+      ],
+      "css": [],
+      "matches": [
+        "https://m.place.naver.com/rest/vaccine*"
+      ],
       "run_at": "document_end"
     }
   ],
   "background": {
-    "page": "background.html"
+    "service_worker": "background.js"
   },
-  "web_accessible_resources": ["inject.js", "assets/tada.mp3"],
-  "browser_action": {
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "tada.mp3", "boing.mp3"
+      ],
+      "matches": [
+        "https://*.naver.com/*"
+      ]
+    }
+  ],
+  "action": {
     "default_title": "NAVER Vaccine MACRO",
     "default_popup": "popup.html"
   }

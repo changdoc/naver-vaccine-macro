@@ -64,12 +64,18 @@
         let interval = document.getElementById('interval').value;
         let isReserveTest = document.getElementById('reserve_test').checked ? 1 : 0;
 
+        if (!interval || parseInt(interval) < MIN_RELOAD_INTERVAL_MILLISECONDS)
+        {
+            interval = MIN_RELOAD_INTERVAL_MILLISECONDS;
+            document.getElementById('interval').value = interval;
+        }
+
         localStorage.setItem('NAVER_VACCINE_MACRO::vaccine', selected.id);
         localStorage.setItem('NAVER_VACCINE_MACRO::interval', interval);
         localStorage.setItem('NAVER_VACCINE_MACRO::reserve_test', isReserveTest);
 
         // 크롬 스토리지에 입력 값 저장
-        chrome.storage.sync.set({
+        chrome.storage.local.set({
             selected_vaccine: getSelectedVaccineName(),
             interval: interval,
             is_test: isReserveTest
@@ -98,6 +104,8 @@
 
         fetch(url).then(response => {
             if (response.status === 200) {
+                chrome.storage.local.set({"botToken": botToken});
+                chrome.storage.local.set({"chatId": chatId});
                 localStorage.setItem('NAVER_VACCINE_MACRO::bot-token', botToken);
                 localStorage.setItem('NAVER_VACCINE_MACRO::chat-id', chatId);
                 setMessage(MESSAGE_CONNECTION_SUCCESS);
@@ -115,6 +123,8 @@
         document.getElementById('chat-id').value = '';
         localStorage.removeItem('NAVER_VACCINE_MACRO::bot-token');
         localStorage.removeItem('NAVER_VACCINE_MACRO::chat-id');
+        chrome.storage.local.set("botToken", undefined);
+        chrome.storage.local.set("chatId", undefined);
         setMessage(MESSAGE_RESET);
     }
 
@@ -175,6 +185,7 @@
             return;
 
         localStorage.setItem('NAVER_VACCINE_MACRO::hospital_list', json);
+        chrome.storage.local.set({hospital_list:JSON.stringify(list)});
 
         const desc = document.getElementById('hospital_results_desc');
         const result = document.getElementById('hospital_results');
