@@ -4,7 +4,7 @@ let _tick;
 const RELOAD_INTERVAL_MILLISECONDS = 200;
 let hospitalList;
 let hospitalListStrCache;
-const _className = "_" + Math.random().toString(36).substring(2,7);
+const _className = "_" + Math.random().toString(36).substring(2, 7);
 const _buttonStyle = "width: 175px;height: 38px;line-height: 38px;text-align: center;background: linear-gradient(to bottom, #17e677, #19d1d1);color: #ffffff;font-size: 13px;border: 1px solid #149393;cursor: pointer;";
 
 let nums = new Array();
@@ -135,8 +135,7 @@ const afterReload = () => {
 const macro = (hospitalListStr) => {
 
     // console.log("execute macro." + hospitalListStr);
-    if (hospitalListStr && hospitalListStrCache != hospitalListStr)
-    {
+    if (hospitalListStr && hospitalListStrCache != hospitalListStr) {
         hospitalList = JSON.parse(hospitalListStr);
         hospitalListStrCache = hospitalListStr;
         // console.log("parsed list. hospital list string changed.");
@@ -220,15 +219,14 @@ const getHospital = (name) => {
 };
 
 let reloading = false;
-const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
+const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
         if (mutation.type == "attributes") {
             let prevReloading = reloading;
             if (sButtonReload)
                 reloading = sButtonReload.classList.length == 2;
 
-            if (prevReloading && !reloading)
-            {
+            if (prevReloading && !reloading) {
                 // console.log("reload done. try after reload.");
                 // setTimeout(afterReload, 0);
                 afterReload();
@@ -237,24 +235,7 @@ const observer = new MutationObserver(function(mutations) {
     });
 });
 
-(() => {
-    // console.log("map.js loaded.");
-
-    let places = document.querySelectorAll(".place_blind");
-    // console.log(places);
-    for (let i = 0; i < places.length; i++) {
-        if (!sButtonReload && places[i].innerHTML == "새로고침")
-        {
-            sButtonReload = places[i].parentNode;
-            break;
-        }
-    }
-
-    if (!sButtonReload) {
-        console.error("can't found reload button, ignored macro.");
-        return;
-    }
-
+const _prepare = () => {
     chrome.storage.local.get(function (value) {
 
         observer.observe(sButtonReload, {
@@ -268,7 +249,37 @@ const observer = new MutationObserver(function(mutations) {
             setEscapeEvent();
         }
 
-        sButtonText = isStarted ? "자동 새로고침 정지(ESC)" : "자동 새로고침 시작";;
+        sButtonText = isStarted ? "자동 새로고침 정지(ESC)" : "자동 새로고침 시작";
         setTimeout(injectButton, 100);
     });
+};
+
+const _assureReloadButton = () => {
+    let places = document.querySelectorAll(".place_blind");
+    // console.log(places);
+    for (let i = 0; i < places.length; i++) {
+        if (!sButtonReload && places[i].innerHTML == "새로고침") {
+            sButtonReload = places[i].parentNode;
+            break;
+        }
+    }
+};
+
+let tryCount = 0;
+const _prepareIf = () => {
+    _assureReloadButton();
+
+    if (!sButtonReload) {
+        if (++tryCount > 5)
+            console.error(`can't found reload button ${tryCount}times, try again after 100ms.`);
+        setTimeout(_prepareIf, 100);
+        return;
+    }
+
+    _prepare();
+};
+
+(() => {
+    // console.log("map.js loaded.");
+    _prepareIf();
 })();

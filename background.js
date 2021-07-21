@@ -1,24 +1,24 @@
 const playSound = (param) => {
-    // if (typeof (audio) != "undefined" && audio) {
-    //     audio.pause();
-    //     // document.body.removeChild(audio);
-    //     audio = null;
-    // }
-    // // audio = document.createElement('audio');
-    // // document.body.appendChild(audio);
-    // // audio.autoplay = true;
-    // // audio.src = chrome.runtime.getURL('tada.mp3');
-    // audio = new Audio(chrome.runtime.getURL('tada.mp3'));
-    // audio.play();
-    // console.log(chrome.runtime.getURL('tada.mp3'));
-
-    // manifest v3 에서 재생을 할 수 없어 걍 페이지 오픈해서 재생되도록 적용
     let url = 'boing.mp3';
     if (param == "tada")
         url = 'tada.mp3';
-    chrome.tabs.create({
-        url: chrome.runtime.getURL(url)
-    });
+
+    // manifest v2
+    if (typeof (audio) != "undefined" && audio) {
+        audio.pause();
+        document.body.removeChild(audio);
+        audio = null;
+    }
+    audio = document.createElement('audio');
+    document.body.appendChild(audio);
+    audio.autoplay = true;
+    audio.src = chrome.runtime.getURL(url);
+    audio.play();
+
+    // manifest v3
+    // chrome.tabs.create({
+    //     url: chrome.runtime.getURL(url)
+    // });
 };
 
 const sendTelegramMessage = (key, name, url) => {
@@ -52,7 +52,10 @@ const sendTelegramMessage = (key, name, url) => {
     // const chatId = localStorage.getItem('NAVER_VACCINE_MACRO::chat-id');
 }
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+const chrome_v2 = chrome.extension;
+const chrome_v3 = chrome.runtime; /// manifest v3
+
+chrome_v2.onMessage.addListener((message, sender, sendResponse) => {
     if (message) {
         let needPlaySound = undefined;
 

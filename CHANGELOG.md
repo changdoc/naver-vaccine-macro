@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 맵(네이버 플레이스 잔여백신)에서 새로고침 수행하는 스크립트 추가
 ### Changed
 - 작동 버튼에 specific class 제거, inline style 적용
-- chrome extension manifest V3로 마이그레이션
+- chrome extension manifest V3로 마이그레이션 -> 웨일에서 동작안해서 V2로 다시 롤백
 - 사운드 성공시에만 tada, 나머지는 boing 재생
 
 ## [1.0.9] - 2021-07-20
