@@ -271,8 +271,8 @@ const _prepareIf = () => {
 
     if (!sButtonReload) {
         if (++tryCount > 5)
-            console.error(`can't found reload button ${tryCount}times, try again after 100ms.`);
-        setTimeout(_prepareIf, 100);
+            console.error(`can't found reload button ${tryCount}times, try again after 500ms.`);
+        setTimeout(_prepareIf, 500);
         return;
     }
 
