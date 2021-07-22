@@ -181,10 +181,10 @@ const macro = (data) => {
                 if (isTest) {
                     console.log("will move to :" + url);
                     chrome_v2.sendMessage({type: "testTicketing", url: url, name: sCurrentName});
-                    setTimeout(() => {
-                        confirmButton.click();
-                        document.location = url;
-                    }, 5000);
+                    // setTimeout(() => {
+                    //     confirmButton.click();
+                    //     document.location = url;
+                    // }, 5000);
                 }
 
                 return;
