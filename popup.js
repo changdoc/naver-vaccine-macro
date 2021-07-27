@@ -29,6 +29,9 @@
         const graphqlResult = document.getElementById('graphql_result');
         graphqlResult.value = localStorage.getItem('NAVER_VACCINE_MACRO::hospital_list');
 
+        const kakaoBody = document.getElementById('left_by_count_coords');
+        kakaoBody.value = localStorage.getItem('NAVER_VACCINE_MACRO::kakao_body');
+
         if (graphqlResult.value) extract_list();
 
         let radios = document.querySelectorAll('input[name="select_vaccine"]');
@@ -239,10 +242,22 @@
         }
     }
 
+    const save_kakao_body = () => {
+        const json = document.getElementById('left_by_count_coords').value;
+        // console.log(json);
+        const object = JSON.parse(json);
+        if (!object)
+            return;
+
+        localStorage.setItem('NAVER_VACCINE_MACRO::kakao_body', json);
+        chrome.storage.local.set({kakao_body: JSON.stringify(object)});
+    }
+
     init();
 
     document.getElementById('button-save').addEventListener('click', save);
     document.getElementById('button-reset').addEventListener('click', reset);
     document.getElementById('button-reload').addEventListener('click', reload);
-    document.getElementById('button-extract').addEventListener('click', extract_list)
+    document.getElementById('button-extract').addEventListener('click', extract_list);
+    document.getElementById('button-save-kakao-body').addEventListener('click', save_kakao_body);
 })();
