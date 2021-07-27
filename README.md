@@ -1,13 +1,17 @@
-# 2021-07-20 PM 17:10 
+# NAVER vaccine macro
+NAVER vaccine macro는 네이버 우리 동네 백신 예약 시도를 자동으로 수행해 주는 크롬 확장 프로그램입니다.
+
+## 2021-07-27 PM 22:40
+- main branch 최신 코드 1.1.0에서 맵(네이버, 카카오)에서의 새로고침 -> 네이버 예약 신청 페이지 이동은 테스트 진행 중인 기능입니다.
+
+## 2021-07-20 PM 17:10 
 - 새로 고침 주기 2초(2000ms)로 유지하고 1개의 병원 신청 페이지에서만 동작시키면 예약 시도까지 가능한 것으로 파악됩니다.
 - 예약 시도하는 동안 해당 계정으로 다른 탭, 모바일 등 예약 신청 페이지 접근 시 차단 당할 수 있습니다. 
 - 신청 페이지 접근 차단이 되면 해제까지 1시간 소요됩니다.
 - Release 메뉴에서 1.0.9 버전으로 사용해 주세요.
 
-# 질문은 [Discussion 메뉴](https://github.com/changdoc/naver-vaccine-macro/discussions)를 이용해 주세요.
+## 질문은 [Discussion 메뉴](https://github.com/changdoc/naver-vaccine-macro/discussions)를 이용해 주세요.
 
-# NAVER vaccine macro
-NAVER vaccine macro는 네이버 우리 동네 백신 예약 시도를 자동으로 수행해 주는 크롬 확장 프로그램입니다.
 함께 이겨냅시다 코로나가 종식되는 그날까지!
 
 - 잔여 백신 관련 질병관리청 설명 페이지 [코로나19 예방접종 잔여 백신 당일예약 기능 Q&A](http://kdca.go.kr/gallery.es?mid=a20503010000&bid=0002&act=view&list_no=145144)

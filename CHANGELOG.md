@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- 맵(네이버 플레이스 잔여백신)에서 새로고침 수행하는 스크립트 추가
+- 맵(네이버 플레이스 잔여백신, 카카오 잔여 백신)에서 새로고침 수행하는 스크립트 추가 -> 테스트 중
 ### Changed
 - 작동 버튼에 specific class 제거, inline style 적용
 - chrome extension manifest V3로 마이그레이션 -> 웨일에서 동작안해서 V2로 다시 롤백
