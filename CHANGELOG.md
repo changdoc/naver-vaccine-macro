@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.1.0] - 2021-07-27
 ### Added
 - 맵(네이버 플레이스 잔여백신, 카카오 잔여 백신)에서 새로고침 수행하는 스크립트 추가 -> 테스트 중
 ### Changed
