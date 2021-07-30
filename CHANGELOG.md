@@ -5,14 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- 카카오 맵에서 잔여 백신 탐지했으나 네이버 graphql로 생성한 병원 목록에 존재하지 않는 경우 멈추지 않고 새로 고침 계속 수행되도록 수정 
 
 ## [1.1.0] - 2021-07-27
 ### Added
-- 맵(네이버 플레이스 잔여백신, 카카오 잔여 백신)에서 새로고침 수행하는 스크립트 추가 -> 테스트 중
+- 맵(네이버 플레이스 잔여 백신, 카카오 잔여 백신)에서 새로 고침 수행하는 스크립트 추가
 ### Changed
 - 작동 버튼에 specific class 제거, inline style 적용
-- chrome extension manifest V3로 마이그레이션 -> 웨일에서 동작안해서 V2로 다시 롤백
-- 사운드 성공시에만 tada, 나머지는 boing 재생
+- chrome extension manifest V3로 마이그레이션 -> 웨일에서 동작 안 해서 V2로 다시 롤백
+- 사운드 성공 시에만 tada, 나머지는 boing 재생
 - chrome 스토어에서 tabs permission 사용되는 곳 없다고 리젝 하여 permission 삭제
 
 ## [1.0.9] - 2021-07-20
