@@ -5,8 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.1.1] - 2021-07-31
 ### Changed
-- 카카오 맵에서 잔여 백신 탐지했으나 네이버 graphql로 생성한 병원 목록에 존재하지 않는 경우 멈추지 않고 새로 고침 계속 수행되도록 수정 
+- 맵에서 잔여 백신 탐지했으나 네이버 graphql로 생성한 병원 목록에 존재하지 않는 경우 멈추지 않고 새로 고침 계속 수행되도록 수정 
 
 ## [1.1.0] - 2021-07-27
 ### Added

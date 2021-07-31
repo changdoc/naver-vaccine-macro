@@ -141,7 +141,7 @@ const reload = () => {
                 "sec-fetch-mode": "cors",
                 "sec-fetch-site": "same-origin"
             },
-            "referrer": "https://vaccine-map.kakao.com/map2?v=1",
+            "referrer": "https://vaccine-map.kakao.com/map2",
             "referrerPolicy": "strict-origin-when-cross-origin",
             "body": body,
             "method": "POST",

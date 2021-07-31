@@ -182,8 +182,8 @@ const macro = (hospitalListStr) => {
             nums.push(targetNum);
 
             if (enable) {
-                openReservePage(name, info);
-                return;
+                if (openReservePage(name, info))
+                    return;
             }
         }
     }
@@ -202,8 +202,10 @@ const openReservePage = (name, obj) => {
         const url = RESERVE_URL + orgCd + RESERVER_URL_ADD_PARM + sid;
         console.log("try open url : " + url);
         document.location.href = url;
+        return true;
     } else {
         console.error('cannot found open url for reserve.' + name);
+        return false;
     }
 }
 
