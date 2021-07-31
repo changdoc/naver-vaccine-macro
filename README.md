@@ -1,4 +1,5 @@
-# NAVER vaccine macro
+# NAVER vaccine macro [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fchangdoc%2Fnaver-vaccine-macro&count_bg=%233CC2AD&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
 NAVER vaccine macro는 네이버 우리 동네 백신 예약 시도를 자동으로 수행해 주는 크롬 확장 프로그램입니다.
 
 ## 질문은 [Discussion 메뉴](https://github.com/changdoc/naver-vaccine-macro/discussions)를 이용해 주세요.
