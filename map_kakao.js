@@ -229,7 +229,7 @@ const openReservePage = (name, obj) => {
         document.location.href = url;
         return true;
     } else {
-        console.error('cannot found open url for reserve.' + name);
+        console.log('cannot found open url for reserve. ignored : ' + name);
         return false;
     }
 }
@@ -304,7 +304,7 @@ const _prepareIf = () => {
 
     if (!sButtonReload) {
         if (++tryCount > 5)
-            console.error(`can't found reload button ${tryCount}times, try again after 500ms.`);
+            console.log(`can't found reload button ${tryCount}times, try again after 500ms.`);
         setTimeout(_prepareIf, 500);
         return;
     }
