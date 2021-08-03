@@ -130,7 +130,7 @@ const reload = () => {
             return;
         }
 
-        fetch("https://vaccine-map.kakao.com/api/v2/vaccine/left_count_by_coords", {
+        fetch("https://vaccine-map.kakao.com/api/v3/vaccine/left_count_by_coords", {
             "headers": {
                 "accept": "application/json, text/plain, */*",
                 "accept-language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",

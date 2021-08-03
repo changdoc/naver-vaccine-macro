@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - 네이버 맵에서 네이버 graphql로 생성한 병원 목록에 존재하지 않는 경우 멈추고 있는 이슈 수정
+- 카카오 맵 잔여 백신 조회 api v2 -> v3로 변경
 
 ## [1.1.1] - 2021-07-31
 ### Changed
