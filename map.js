@@ -196,7 +196,7 @@ const RESERVE_URL = 'https://v-search.nid.naver.com/reservation?orgCd=';
 const RESERVER_URL_ADD_PARM = '&sid=';
 
 const openReservePage = (name, obj) => {
-    if (obj.vaccineQuantity && obj.vaccineQuantity.vaccineOrganizationCode) {
+    if (obj && obj.vaccineQuantity && obj.vaccineQuantity.vaccineOrganizationCode) {
         const orgCd = obj.vaccineQuantity.vaccineOrganizationCode;
         const sid = obj.id;
         const url = RESERVE_URL + orgCd + RESERVER_URL_ADD_PARM + sid;

@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- 네이버 맵에서 네이버 graphql로 생성한 병원 목록에 존재하지 않는 경우 멈추고 있는 이슈 수정
 
 ## [1.1.1] - 2021-07-31
 ### Changed
