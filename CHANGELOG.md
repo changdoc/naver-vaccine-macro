@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.1.3] - 2021-08-06
 - 본인 인증 요구되는 상황에서 매크로 동작, 버튼 노출 하지 않도록 수정
 
 ## [1.1.2]
