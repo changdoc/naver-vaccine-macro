@@ -124,7 +124,7 @@ const macro = (data) => {
     // phoneLink.click();
 
     const confirmButton = document.getElementById('reservation_confirm');
-    console.log(confirmButton);
+    // console.log(confirmButton);
     // confirmButton.click();
 
     const orgName = document.querySelector(".h_title .accent");
@@ -214,6 +214,11 @@ const reload = () => {
 
     if (localStorage.getItem("macro"))
         localStorage.removeItem("macro");
+
+    if (document.querySelector('.certify_area')) {
+        console.log('need certify self.');
+        return;
+    }
 
     if (document.querySelector(".agree_all")) {
         let checkList = document.querySelectorAll('.input_check');
