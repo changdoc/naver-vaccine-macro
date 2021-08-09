@@ -122,7 +122,7 @@ const afterReload = () => {
         const isStarted = value.macro === "on";
 
         if (isStarted) {
-            macro(value.hospital_list);
+            macro(value);
         }
 
         if (!sButtonReload) {
@@ -132,8 +132,53 @@ const afterReload = () => {
     });
 };
 
-const macro = (hospitalListStr) => {
+function _findWithSelectedName(selected) {
+    const selOnMenu = selected;
+    if (selected == '아스트라제네카')
+        selected = 'AZ';
 
+    let listContainer = document.getElementById('_list_scroll_container');
+    let placesForSelect = listContainer.querySelectorAll('.place_blind');
+    // console.log(placesForSelect);
+    let checkHospitalCount = 0;
+    for (let i = 0; i < placesForSelect.length; i++) {
+        if (placesForSelect[i].innerHTML == '잔여백신종류') {
+            let next = placesForSelect[i].parentNode.nextSibling;
+            while (next) {
+                let curr = next;
+                next = curr.nextSibling;
+
+                let vaccineName = curr.firstChild.nodeValue;
+                if (selected != vaccineName)
+                    continue;
+
+                let targetName = curr.parentNode.parentNode.childNodes[0].querySelector('span').innerText;
+                let em = curr.querySelector('em');
+                let num = parseInt(em.firstChild.nodeValue);
+                if (isNaN(num))
+                    num = 0;
+                // console.log(next.innerText,'/', next.innerHTML,'/', next.firstChild,'/', em,'/', em.firstChild);
+
+                let enable = num > 0;
+                if (enable) {
+                    console.log(targetName, '/', vaccineName, '/', num, enable);
+                    let info = getHospital(targetName);
+                    if (openReservePage(targetName, info))
+                        return;
+                }
+                else
+                    ++checkHospitalCount;
+            }
+        }
+    }
+    console.log("선택 백신 종류:", selOnMenu, ",현재 확인 병원 수 :", checkHospitalCount);
+
+    // keep going
+    _reload();
+}
+
+const macro = (data) => {
+    const hospitalListStr = data.hospital_list;
     // console.log("execute macro." + hospitalListStr);
     if (hospitalListStr && hospitalListStrCache != hospitalListStr) {
         hospitalList = JSON.parse(hospitalListStr);
@@ -146,6 +191,15 @@ const macro = (hospitalListStr) => {
         console.log("hospitalList is empty. cannot macro execute.");
         macroStop('empty');
         alert("병원 목록 데이터가 없습니다. 현재 지도에서 새로고침을 수행한 graphql result를 매크로 페이지에 입력하여 병원 목록을 생성한 뒤 동작 시켜주세요.");
+        return;
+    }
+
+    let selectedName = null;
+    if (data.selected_vaccine != null)
+        selectedName = data.selected_vaccine;
+
+    if (selectedName != null) {
+        _findWithSelectedName(selectedName);
         return;
     }
 
@@ -247,7 +301,7 @@ const _prepare = () => {
         const isStarted = value.macro === "on";
 
         if (isStarted) {
-            macro(value.hospital_list);
+            macro(value);
             setEscapeEvent();
         }
 
