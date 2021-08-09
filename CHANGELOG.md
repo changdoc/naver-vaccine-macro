@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- 맵(카카오 잔여 백신)에서 선택 백신 종류로 탐색하도록 로직 추가 (카카오 인증 후 가이드 필요)
 
 ## [1.1.4] - 2021-08-09
 - 맵(네이버 플레이스 잔여 백신)에서 선택 백신 종류로 탐색하도록 로직 추가

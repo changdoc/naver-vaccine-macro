@@ -170,6 +170,87 @@ const afterReload = (response) => {
     });
 };
 
+function _findWithSelectedName(selected, data) {
+    const length = data.organizations.length;
+    const selOnMenu = selected;
+
+    let loadedCount = 0;
+    let loadCount = 0;
+    for (let i = 0; i < length; i++) {
+        const curr = data.organizations[i];
+        const enable = curr.leftCounts > 0;
+
+        if (!enable) {
+            continue;
+        }
+
+        console.log("curr.leftCounts > 0, " + curr.orgName);
+
+        let info = getHospitalByCode(curr.orgCode);
+        if (info == null) {
+            console.log("found by orgCode is null : " + curr);
+            info = getHospital(curr.orgName);
+        }
+
+        ++loadCount;
+        const countUrl = '/api/v3/org/org_code/' + curr.orgCode;
+
+        fetch(countUrl, {
+            "headers": {
+                "accept": "application/json, text/plain, */*",
+                // "accept-language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
+                "content-type": "application/json;charset=UTF-8",
+                // "sec-ch-ua": "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"91\", \"Chromium\";v=\"91\"",
+                // "sec-ch-ua-mobile": "?0",
+                // "sec-fetch-dest": "empty",
+                // "sec-fetch-mode": "cors",
+                // "sec-fetch-site": "same-origin"
+            },
+            // "referrer": "https://vaccine-map.kakao.com/map2",
+            // "referrerPolicy": "strict-origin-when-cross-origin",
+            "method": "GET",
+            // "mode": "cors",
+            // "credentials": "include"
+        }).then(function (response) {
+            if (response && response.status === 200) {
+                response.json().then(function (data) {
+                    if (data.leftCount > 0) {
+                        for (let i = 0; i < data.lefts.length; ++i) {
+                            if (data.lefts[i].vaccineName == selOnMenu
+                                && data.lefts[i].leftCount > 0) {
+                                if (openReservePage(curr.orgName, info))
+                                    return;
+                            }
+                        }
+                    }
+
+                    if (++loadedCount == loadCount)
+                    {
+                        console.log("선택 백신 종류:", selOnMenu, ",현재 확인 병원 수 :", loadedCount);
+                        if (!movingToReserve)
+                        {
+                            // keep going
+                            _reload();
+                        }
+                    }
+                });
+            }
+            else
+            {
+                if (++loadedCount == loadCount)
+                {
+                    console.log("선택 백신 종류:", selOnMenu, ",현재 확인 병원 수 :", loadedCount);
+                    if (!movingToReserve)
+                    {
+                        // keep going
+                        _reload();
+                    }
+                }
+            }
+        });
+    }
+}
+
 const macro = (value, response) => {
     const hospitalListStr = value.hospital_list;
     // console.log("execute macro." + hospitalListStr);
@@ -187,11 +268,19 @@ const macro = (value, response) => {
         return;
     }
 
+    let selectedName = null;
+    if (value.selected_vaccine != null)
+        selectedName = value.selected_vaccine;
+
     if (response && response.status === 200) {
         response.json().then(function (data) {
             // console.log(data);
+            if (selectedName != null) {
+                _findWithSelectedName(selectedName, data);
+                return;
+            }
+
             const length = data.organizations.length;
-            console.log("total:", length);
             for (let i = 0; i < length; i++) {
                 const curr = data.organizations[i];
                 const enable = curr.leftCounts > 0;
@@ -199,9 +288,9 @@ const macro = (value, response) => {
 
                 if (enable) {
                     console.log("curr.leftCounts > 0, " + curr.orgName);
+
                     let info = getHospitalByCode(curr.orgCode);
-                    if (info == null)
-                    {
+                    if (info == null) {
                         console.log("found by orgCode is null : " + curr);
                         info = getHospital(curr.orgName);
                     }
@@ -210,7 +299,11 @@ const macro = (value, response) => {
                         return;
                 }
             }
+
+            // keep going
+            _reload();
         });
+        return;
     }
 
     // keep going
@@ -219,9 +312,14 @@ const macro = (value, response) => {
 
 const RESERVE_URL = 'https://v-search.nid.naver.com/reservation?orgCd=';
 const RESERVER_URL_ADD_PARM = '&sid=';
-
+let movingToReserve = false;
 const openReservePage = (name, obj) => {
+    if (movingToReserve) {
+        console.log("already moving..!");
+        return false;
+    }
     if (obj && obj.vaccineQuantity && obj.vaccineQuantity.vaccineOrganizationCode) {
+        movingToReserve = true;
         const orgCd = obj.vaccineQuantity.vaccineOrganizationCode;
         const sid = obj.id;
         const url = RESERVE_URL + orgCd + RESERVER_URL_ADD_PARM + sid;
