@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- 맵(카카오 잔여 백신)에서 선택 백신 종류로 탐색하도록 로직 추가 (카카오 인증 후 가이드 필요)
+
+## [1.1.5] - 2021-08-10
+- 맵(카카오 잔여 백신)에서 선택 백신 종류로 탐색하도록 로직 추가 (카카오 인증 후 동작 필요)
 - 카카오 맵에서 잔여 백신 종류 선택 상황에서 개별 병원 조회 시도 수가 없을때 동작 멈추는 부분 수정
 
 ## [1.1.4] - 2021-08-09
