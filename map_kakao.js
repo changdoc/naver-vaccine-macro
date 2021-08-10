@@ -171,7 +171,7 @@ const afterReload = (response) => {
 };
 
 function _findWithSelectedName(selected, data) {
-    const length = data.organizations.length;
+    const length = data === undefined || data.organizations === undefined ? 0 : data.organizations.length;
     const selOnMenu = selected;
 
     let loadedCount = 0;
@@ -249,6 +249,9 @@ function _findWithSelectedName(selected, data) {
             }
         });
     }
+
+    if (loadCount == 0)
+        _reload();
 }
 
 const macro = (value, response) => {
