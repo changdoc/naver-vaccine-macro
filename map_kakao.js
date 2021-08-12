@@ -278,7 +278,7 @@ const macro = (value, response) => {
     if (response && response.status === 200) {
         response.json().then(function (data) {
             // console.log(data);
-            if (selectedName != null) {
+            if (selectedName != null && selectedName != undefined && selectedName.length > 0) {
                 _findWithSelectedName(selectedName, data);
                 return;
             }

@@ -198,7 +198,7 @@ const macro = (data) => {
     if (data.selected_vaccine != null)
         selectedName = data.selected_vaccine;
 
-    if (selectedName != null) {
+    if (selectedName != null && selectedName != undefined && selectedName.length > 0) {
         _findWithSelectedName(selectedName);
         return;
     }
