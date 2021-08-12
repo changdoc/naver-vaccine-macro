@@ -160,7 +160,7 @@ const macro = (data) => {
 
         // console.log(currentVaccineParam);
 
-        let num = parseInt(targetNum.innerHTML);
+        let num = parseInt(targetNum?.innerHTML || 0);
         // console.log(targetName.innerHTML + ", num:" + num);
 
         let isSelected = selectedName == null || selectedName == "" || selectedName == targetName.innerHTML;
