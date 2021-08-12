@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- 예약 신청 페이지에서 잔여백신 있지만 대상이 아닐때 동작 멈추는 이슈 수정
 
 ## [1.1.5] - 2021-08-10
 - 맵(카카오 잔여 백신)에서 선택 백신 종류로 탐색하도록 로직 추가 (카카오 인증 후 동작 필요)

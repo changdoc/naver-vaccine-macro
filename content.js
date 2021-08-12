@@ -159,15 +159,17 @@ const macro = (data) => {
         let currentVaccineParam = $row.querySelector("input").id;
 
         // console.log(currentVaccineParam);
-
-        let num = parseInt(targetNum.innerHTML);
+        let num = 0;
+        if (targetNum && targetNum.innerHTML)
+            num = parseInt(targetNum.innerHTML);
         // console.log(targetName.innerHTML + ", num:" + num);
 
         let isSelected = selectedName == null || selectedName == "" || selectedName == targetName.innerHTML;
         if (isSelected) {
             let enable = num > 0;
             targetName.style.backgroundColor = enable ? "#3ef03e" : "#f03e3e";
-            targetNum.style.backgroundColor = enable ? "#3ef03e" : "#f03e3e";
+            if (targetNum)
+                targetNum.style.backgroundColor = enable ? "#3ef03e" : "#f03e3e";
 
             if (enable) {
                 console.log("is test:" + isTest);
