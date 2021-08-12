@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.1.6] - 2021-08-12
 - 예약 신청 페이지에서 잔여백신 있지만 대상이 아닐때 동작 멈추는 이슈 수정
 
 ## [1.1.5] - 2021-08-10
