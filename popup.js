@@ -182,7 +182,7 @@
         const object = JSON.parse(json);
         if (!object)
             return;
-        const list = object[0].data.rests.businesses.items;
+        const list = object.items;
         // console.log(list);
         if (!list)
             return;
@@ -214,6 +214,7 @@
         result.innerHTML = "";
         for (let i = 0; i < list.length; i++) {
             const obj = list[i];
+            console.log(obj);
             if (!obj)
                 continue;
             const name = obj.name;

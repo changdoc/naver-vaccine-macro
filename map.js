@@ -5,7 +5,7 @@ const RELOAD_INTERVAL_MILLISECONDS = 200;
 let hospitalList;
 let hospitalListStrCache;
 const _className = "_" + Math.random().toString(36).substring(2, 7);
-const _buttonStyle = "width: 175px;height: 38px;line-height: 38px;text-align: center;background: linear-gradient(to bottom, #17e677, #19d1d1);color: #ffffff;font-size: 13px;border: 1px solid #149393;cursor: pointer;";
+const _buttonStyle = "width: 175px;height: 38px;line-height: 38px;text-align: center;background: linear-gradient(to bottom, #17e677, #19d1d1);color: #ffffff;font-size: 13px;border: 1px solid #149393;cursor: pointer;float:right;";
 
 let nums = new Array();
 
@@ -144,6 +144,8 @@ function _findWithSelectedName(selected) {
     for (let i = 0; i < placesForSelect.length; i++) {
         if (placesForSelect[i].innerHTML == '잔여백신종류') {
             let next = placesForSelect[i].parentNode.nextSibling;
+            if (!next) continue;
+
             while (next) {
                 let curr = next;
                 next = curr.nextSibling;
@@ -157,7 +159,7 @@ function _findWithSelectedName(selected) {
                 let num = parseInt(em.firstChild.nodeValue);
                 if (isNaN(num))
                     num = 0;
-                // console.log(next.innerText,'/', next.innerHTML,'/', next.firstChild,'/', em,'/', em.firstChild);
+                // console.log(targetName, num, curr ? curr.innerText : '','/', curr ? curr.innerHTML : '','/', curr ? curr.firstChild : '','/', em,'/', em ? em.firstChild : '');
 
                 let enable = num > 0;
                 if (enable) {
@@ -311,7 +313,7 @@ const _prepare = () => {
 };
 
 const _assureReloadButton = () => {
-    let places = document.querySelectorAll(".place_blind");
+    let places = document.querySelectorAll("span");
     // console.log(places);
     for (let i = 0; i < places.length; i++) {
         if (!sButtonReload && places[i].innerHTML == "새로고침") {
