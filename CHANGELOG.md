@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - 네이버 맵 새로고침 html 구조 변경 대응
 - 네이버 맵 api response 변경사항 반영
+- 네이버 플레이스 잔여백신 링크 변경 https://m.place.naver.com/rest/vaccine
 
 ## [1.1.6] - 2021-08-12
 - 예약 신청 페이지에서 잔여백신 있지만 대상이 아닐때 동작 멈추는 이슈 수정
